@@ -3,10 +3,14 @@ package mino.java.ems_backend.service.impl;
 import lombok.AllArgsConstructor;
 import mino.java.ems_backend.dto.EmployeeDto;
 import mino.java.ems_backend.entity.Employee;
+import mino.java.ems_backend.exception.ResourceNotFoundException;
 import mino.java.ems_backend.mapper.EmployeeMapper;
 import mino.java.ems_backend.repository.EmployeeRepository;
 import mino.java.ems_backend.service.EmployeeService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -20,5 +24,19 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = EmployeeMapper.mapToEmployee(employeeDto);
         Employee savedEmployee = employeeRepository.save(employee);
         return EmployeeMapper.mapToEmployeeDto(savedEmployee);
+    }
+
+    @Override
+    public EmployeeDto getElementById(Long employeeId) {
+        Employee employee = employeeRepository.findById(employeeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee is not exist with given id" + employeeId));
+        return EmployeeMapper.mapToEmployeeDto(employee);
+    }
+
+    @Override
+    public List<EmployeeDto> getAllEmployees() {
+        List<Employee> employees = employeeRepository.findAll();
+        return employees.stream().map((employee)-> EmployeeMapper.mapToEmployeeDto(employee))
+                .collect(Collectors.toList());
     }
 }
