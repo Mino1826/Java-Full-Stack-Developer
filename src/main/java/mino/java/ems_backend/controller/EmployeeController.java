@@ -1,5 +1,6 @@
 package mino.java.ems_backend.controller;
 
+import lombok.AllArgsConstructor;
 import mino.java.ems_backend.dto.EmployeeDto;
 import mino.java.ems_backend.entity.Employee;
 import mino.java.ems_backend.service.EmployeeService;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
+//@AllArgsConstructor
 @RestController
 @RequestMapping("/api/employees")
 public class EmployeeController {
