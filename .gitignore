@@ -1,3 +1,7 @@
+node_modules/
+ems-frontend/node_modules/
+ems-frontend/dist/
+ems-frontend/.env
 HELP.md
 target/
 .mvn/wrapper/maven-wrapper.jar
@@ -31,3 +35,8 @@ build/
 
 ### VS Code ###
 .vscode/
+node_modules/
+ems-frontend/node_modules/
+ems-frontend/dist/
+ems-frontend/.env
+
